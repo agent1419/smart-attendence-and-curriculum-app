@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Attendance & Curriculum</title>
+  <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Home -->
+  <section id="home" class="page active">
+    <h1>🎓 Smart Attendance & Curriculum</h1>
+    <button onclick="showPage('teacherLoginPage')">Teacher Login</button>
+    <button onclick="showPage('studentLoginPage')">Student Login</button>
+  </section>
+
+  <!-- Teacher Login -->
+  <section id="teacherLoginPage" class="page">
+    <h1>👨‍🏫 Teacher Login</h1>
+    <input type="text" id="teacherUser" placeholder="Username">
+    <input type="password" id="teacherPass" placeholder="Password">
+    <button onclick="teacherLogin()">Login</button>
+    <p id="teacherMsg"></p>
+    <button onclick="showPage('home')">⬅ Back</button>
+  </section>
+
+  <!-- Teacher Portal -->
+  <section id="teacherPortal" class="page">
+    <h1>🎯 Teacher Portal</h1>
+    <input type="text" id="teacherName" placeholder="Teacher Name">
+    <input type="text" id="subject" placeholder="Subject">
+    <input type="text" id="className" placeholder="Class">
+    <button onclick="generateQR()">Generate QR</button>
+    <div id="qrcode"></div>
+    <p id="qrText"></p>
+    <button onclick="showPage('teacherDashboard')">📊 Go to Dashboard</button>
+    <button onclick="logout('teacher')">🚪 Logout</button>
+  </section>
+
+  <!-- Teacher Dashboard -->
+  <section id="teacherDashboard" class="page">
+    <h1>📊 Teacher Dashboard</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Teacher</th>
+          <th>Subject</th>
+          <th>Class</th>
+          <th>Date</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody id="sessionTable"></tbody>
+    </table>
+    <button onclick="showPage('teacherPortal')">⬅ Back to Portal</button>
+    <button onclick="logout('teacher')">🚪 Logout</button>
+  </section>
+
+  <!-- Student Login -->
+  <section id="studentLoginPage" class="page">
+    <h1>👩‍🎓 Student Login</h1>
+    <input type="text" id="studentUser" placeholder="Username">
+    <input type="password" id="studentPass" placeholder="Password">
+    <button onclick="studentLogin()">Login</button>
+    <p id="studentMsg"></p>
+    <button onclick="showPage('home')">⬅ Back</button>
+  </section>
+
+  <!-- Student Portal -->
+  <section id="studentPortal" class="page">
+    <h1>👩‍🎓 Student Portal</h1>
+    <button onclick="startScan()">📷 Scan Attendance QR</button>
+    <div id="reader"></div>
+    <p id="result">Click the button above to start scanning</p>
+    <button onclick="showPage('studentHistory')">📋 View History</button>
+    <button onclick="showPage('studentCurriculum')">📘 View Curriculum</button> <!-- NEW -->
+    <button onclick="logout('student')">🚪 Logout</button>
+  </section>
+
+  <!-- Student History -->
+  <section id="studentHistory" class="page">
+    <h1>📖 My Attendance History</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Teacher</th>
+          <th>Subject</th>
+          <th>Class</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="historyTable"></tbody>
+    </table>
+    <button onclick="loadStudentHistory()">🔄 Refresh</button>
+    <button onclick="showPage('studentPortal')">⬅ Back</button>
+  </section>
+
+  <!-- Student Curriculum -->
+  <section id="studentCurriculum" class="page">
+    <h1>📘 Personalised Curriculum</h1>
+    <p>Based on your interests, here are some recommendations:</p>
+    <ul id="curriculumList"></ul>
+    <button onclick="showPage('studentPortal')">⬅ Back</button>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
